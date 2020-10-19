@@ -36,6 +36,8 @@ def get_install_requires():
 def get_extras_require():
     return {
         "dev": [
+            # required by pandas
+            "pandas",
             # code formatting
             "flake8",
             "isort",
