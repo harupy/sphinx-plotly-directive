@@ -153,9 +153,9 @@ from docutils.parsers.rst.directives.images import Image
 import sphinx_plotly_directive
 from sphinx_plotly_directive.utils import (
     assign_last_line_into_variable,
-    save_plotly_figure,
-    create_directive_block,
     create_code_block,
+    create_directive_block,
+    save_plotly_figure,
 )
 
 
