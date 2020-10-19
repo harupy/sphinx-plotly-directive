@@ -131,6 +131,12 @@ The plot directive has the following configuration options:
         a central directory (also added to `sys.path`) where data files and
         helper modules for all code are located.
 
+    plotly_iframe_width
+        The width of the iframe that stores a plotly figure. Defaults to "100%".
+
+    plotly_iframe_height
+        The width of the iframe that stores a plotly figure. Defaults to "500px".
+
     plotly_template
         Provide a customized template for preparing restructured text.
 """
@@ -272,6 +278,8 @@ def setup(app):
     app.add_config_value("plotly_rcparams", {}, True)
     app.add_config_value("plotly_apply_rcparams", False, True)
     app.add_config_value("plotly_working_directory", None, True)
+    app.add_config_value("plotly_iframe_width", "100%", True)
+    app.add_config_value("plotly_iframe_height", "500px", True)
     app.add_config_value("plotly_template", None, True)
 
     app.add_config_value("plotly_include_directive_source", None, False)
@@ -382,8 +390,8 @@ Output:
       {{ option }}
       {% endfor %}
 
-       <iframe src="{{ fig.basename }}.{{ default_fmt }}"
-        width="100%" height="500px" frameborder="0"></iframe>
+       <iframe src="{{ fig.basename }}.{{ default_fmt }}" width="{{ iframe_width }}"
+        height="{{ iframe_height }}" frameborder="0"></iframe>
 
       {% if html_show_formats and multi_figure -%}
         (
@@ -405,8 +413,8 @@ Output:
       {{ option }}
       {% endfor %}
 
-       <iframe src="{{ fig.basename }}.{{ default_fmt }}"
-        width="100%" height="500px" frameborder="0"></iframe>
+       <iframe src="{{ fig.basename }}.{{ default_fmt }}" width="{{ iframe_width }}"
+        height="{{ iframe_height }}" frameborder="0"></iframe>
 
       {{ caption }}
    {% endfor %}
@@ -824,6 +832,8 @@ def run(arguments, content, options, state_machine, state, lineno):
             multi_figure=len(figures) > 1,
             options=opts,
             figures=figures,
+            iframe_width=config.plotly_iframe_width,
+            iframe_height=config.plotly_iframe_height,
             source_code=source_code,
             html_show_formats=config.plotly_html_show_formats and len(figures),
             caption=caption,
