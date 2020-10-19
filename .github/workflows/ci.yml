@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v1
         with:
           python-version: 3.7
-      - run: pip install -e ".dev"
+      - run: pip install -e ".[dev]"
       - run: flake8 .
       - run: isort --check-only .
       - run: black --check .
@@ -28,5 +28,5 @@ jobs:
       - uses: actions/setup-python@v1
         with:
           python-version: 3.7
-      - run: pip install -e ".dev"
+      - run: pip install -e ".[dev]"
       - run: pytest tests
