@@ -7,11 +7,17 @@ A directive for including a Plotly figure in a Sphinx document.
 
 ## Install
 
-```
+```bash
+# pypi
+pip install sphinx-plotly-directive
+
+# dev version
 pip install git+https://github.com/harupy/sphinx-plotly-directive.git
 ```
 
 ## How to use
+
+#### Source:
 
 ```
 .. plotly::
@@ -21,6 +27,12 @@ pip install git+https://github.com/harupy/sphinx-plotly-directive.git
 ```
 
 The last line of a code block must end with an expression that evaluates to a plotly figure.
+
+#### Output:
+
+<img src="https://user-images.githubusercontent.com/17039389/96469067-c3275b80-1267-11eb-89b5-4370e945ac2c.png" width="80%" />
+
+See [documentation](https://sphinx-plotly-directive.readthedocs.io/en/latest/index.html) for details
 
 ## Development
 
