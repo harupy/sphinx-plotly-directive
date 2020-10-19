@@ -1,5 +1,6 @@
 # sphinx-plotly-directive
 
+[![pypi badge](https://img.shields.io/pypi/v/sphinx-plotly-directive?color=blue)](https://pypi.org/project/sphinx-plotly-directive/)
 ![CI](https://github.com/harupy/sphinx-plotly-directive/workflows/CI/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/sphinx-plotly-directive/badge/?version=latest)](https://sphinx-plotly-directive.readthedocs.io/en/latest/?badge=latest)
 
