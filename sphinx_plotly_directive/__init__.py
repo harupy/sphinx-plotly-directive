@@ -94,8 +94,7 @@ The plot directive has the following configuration options:
         Code that should be executed before each plot. If not specified or None
         it will default to a string containing::
 
-            import numpy as np
-            from matplotlib import pyplot as plt
+            import plotly
 
     plotly_basedir
         Base directory, to which ``plot::`` file names are relative
