@@ -383,7 +383,7 @@ Output:
       {{ option }}
       {% endfor %}
 
-       <iframe src="{{ dest_dir }}/{{ fig.basename }}.{{ default_fmt }}"
+       <iframe src="{{ fig.basename }}.{{ default_fmt }}"
         width="100%" height="500px" frameborder="0"></iframe>
 
       {% if html_show_formats and multi_figure -%}
@@ -406,7 +406,7 @@ Output:
       {{ option }}
       {% endfor %}
 
-       <iframe src="{{ dest_dir }}/{{ fig.basename }}.{{ default_fmt }}"
+       <iframe src="{{ fig.basename }}.{{ default_fmt }}"
         width="100%" height="500px" frameborder="0"></iframe>
 
       {{ caption }}
