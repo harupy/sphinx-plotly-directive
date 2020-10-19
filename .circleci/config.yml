@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: pip install -e ".[dev]"
+          command: sudo pip install -e ".[dev]"
       - run:
           name: Build documentation
           command: cd docs && make html
