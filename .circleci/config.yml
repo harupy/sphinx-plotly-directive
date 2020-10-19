@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  document:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          # Without `sudo`, `pip install` fails `sudo` due to a permission related issue.
+          command: sudo pip install -e ".[dev]"
+      - run:
+          name: Build documentation
+          command: cd docs && make html
+
+      - store_artifacts:
+          path: ./docs/build/html
+
+workflows:
+  main:
+    jobs:
+      - document
