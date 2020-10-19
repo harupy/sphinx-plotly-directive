@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  document:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: pip install -e ".[dev]"
+      - run:
+          name: Build documentation
+          command: cd docs && make html
+
+      - store_artifacts:
+          path: ./docs/build/html
+
+workflows:
+  main:
+    jobs:
+      - document
