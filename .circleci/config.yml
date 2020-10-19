@@ -8,6 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
+          # Without `sudo`, `pip install` fails `sudo` due to a permission related issue.
           command: sudo pip install -e ".[dev]"
       - run:
           name: Build documentation
