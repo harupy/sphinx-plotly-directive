@@ -114,15 +114,6 @@ The plot directive has the following configuration options:
     plotly_html_show_formats
         Whether to show links to the files in HTML.
 
-    plotly_rcparams
-        A dictionary containing any non-standard rcParams that should
-        be applied before each plot.
-
-    plotly_apply_rcparams
-        By default, rcParams are applied when ``:context:`` option is not used
-        in a plot directive.  This configuration option overrides this behavior
-        and applies rcParams before each plot.
-
     plotly_working_directory
         By default, the working directory will be changed to the directory of
         the example, so the code can get at its data files, if any.  Also its
@@ -275,8 +266,6 @@ def setup(app):
     app.add_config_value("plotly_formats", ["html"], True)
     app.add_config_value("plotly_basedir", None, True)
     app.add_config_value("plotly_html_show_formats", True, True)
-    app.add_config_value("plotly_rcparams", {}, True)
-    app.add_config_value("plotly_apply_rcparams", False, True)
     app.add_config_value("plotly_working_directory", None, True)
     app.add_config_value("plotly_iframe_width", "100%", True)
     app.add_config_value("plotly_iframe_height", "500px", True)
@@ -617,7 +606,7 @@ def render_figures(
 
     for i, code_piece in enumerate(code_pieces):
 
-        if not context or config.plotly_apply_rcparams:
+        if not context:
             pass
         elif close_figs:
             pass
@@ -642,7 +631,7 @@ def render_figures(
 
         results.append((code_piece, figures))
 
-    if not context or config.plotly_apply_rcparams:
+    if not context:
         pass
 
     return results
