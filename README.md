@@ -7,7 +7,11 @@ A directive for including a Plotly figure in a Sphinx document.
 
 ## Install
 
-```
+```bash
+# pypi
+pip install sphinx-plotly-directive
+
+# dev version
 pip install git+https://github.com/harupy/sphinx-plotly-directive.git
 ```
 
