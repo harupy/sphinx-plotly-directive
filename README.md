@@ -17,7 +17,7 @@ pip install git+https://github.com/harupy/sphinx-plotly-directive.git
 
 ## How to use
 
-Source:
+#### Source:
 
 ```
 .. plotly::
@@ -28,7 +28,7 @@ Source:
 
 The last line of a code block must end with an expression that evaluates to a plotly figure.
 
-Output:
+#### Output:
 
 ![example](https://user-images.githubusercontent.com/17039389/96469067-c3275b80-1267-11eb-89b5-4370e945ac2c.png)
 
