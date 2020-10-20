@@ -36,7 +36,7 @@ def get_install_requires():
 def get_extras_require():
     return {
         "dev": [
-            # required by pandas
+            # required by plotly express
             "pandas",
             # code formatting
             "flake8",
