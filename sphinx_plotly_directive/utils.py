@@ -25,7 +25,13 @@ def create_directive_block(name, arguments, options, content):
     lines = [header]
 
     if len(options.items()) > 0:
-        options_block = "\n".join(":{}: {}".format(k, v) for k, v in options.items())
+
+        def process_value(v):
+            if isinstance(v, list):
+                return ", ".join(v)
+            return v
+
+        options_block = "\n".join(":{}: {}".format(k, process_value(v)) for k, v in options.items())
         lines.append(textwrap.indent(options_block, INDENT_SPACES))
 
     lines.append("")
