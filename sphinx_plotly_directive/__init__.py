@@ -496,9 +496,12 @@ def run_code(code, code_path, ns=None, function_name=None):
             ns["__name__"] = "__main__"
 
         variable_name = "fig"
-        exec(assign_last_line_into_variable(code, variable_name), ns)
+
         if function_name is not None:
-            exec(function_name + "()", ns)
+            exec(code, ns)
+            exec(assign_last_line_into_variable(function_name + "()", variable_name), ns)
+        else:
+            exec(assign_last_line_into_variable(code, variable_name), ns)
 
         fig = ns[variable_name]
 
