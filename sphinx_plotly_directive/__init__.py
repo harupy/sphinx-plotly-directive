@@ -185,6 +185,10 @@ def _option_format(arg):
     return directives.choice(arg, ("python", "doctest"))
 
 
+def _option_fig_vars(arg):
+    return [x.strip() for x in arg.split(",")]
+
+
 def mark_plot_labels(app, document):
     """
     To make plots referenceable, we need to move the reference from the
@@ -238,6 +242,7 @@ class PlotlyDirective(Directive):
         "nofigs": directives.flag,
         "encoding": directives.encoding,
         "caption": directives.unchanged,
+        "fig-vars": _option_fig_vars,
     }
 
     def run(self):
@@ -382,14 +387,14 @@ Output:
        <iframe src="{{ fig.basename }}.{{ default_fmt }}" width="{{ iframe_width }}"
         height="{{ iframe_height }}" frameborder="0"></iframe>
 
-      {% if html_show_formats and multi_figure -%}
-        (
-        {%- for fmt in img.formats -%}
-        {%- if not loop.first -%}, {% endif -%}
-        `{{ fmt }} <{{ dest_dir }}/{{ fig.basename }}.{{ fmt }}>`__
-        {%- endfor -%}
-        )
-      {%- endif -%}
+   {% if html_show_formats and multi_figure -%}
+     (
+     {%- for fmt in fig.formats -%}
+     {%- if not loop.first -%}, {% endif -%}
+     `{{ fmt }} <{{ dest_dir }}/{{ fig.basename }}.{{ fmt }}>`__
+     {%- endfor -%}
+     )
+   {%- endif -%}
 
       {{ caption }}
    {% endfor %}
@@ -451,7 +456,7 @@ class PlotError(RuntimeError):
     pass
 
 
-def run_code(code, code_path, ns=None, function_name=None):
+def run_code(code, code_path, ns=None, function_name=None, fig_vars=None):
     """
     Import a Python module from a path, and run the function given by
     name, if function_name is not None.
@@ -500,17 +505,20 @@ def run_code(code, code_path, ns=None, function_name=None):
         if function_name is not None:
             exec(code, ns)
             exec(assign_last_line_into_variable(function_name + "()", variable_name), ns)
+            figs = [ns[variable_name]]
+        elif fig_vars:
+            exec(code, ns)
+            figs = [ns[fig_var] for fig_var in fig_vars]
         else:
             exec(assign_last_line_into_variable(code, variable_name), ns)
-
-        fig = ns[variable_name]
+            figs = [ns[variable_name]]
 
     except (Exception, SystemExit) as err:
         raise PlotError(traceback.format_exc()) from err
     finally:
         os.chdir(pwd)
 
-    return [fig]
+    return figs
 
 
 def get_plot_formats(config):
@@ -541,6 +549,7 @@ def render_figures(
     config,
     context_reset=False,
     close_figs=False,
+    fig_vars=None,
 ):
     """
     Run a pyplot script and save the images in *output_dir*.
@@ -614,7 +623,7 @@ def render_figures(
         elif close_figs:
             pass
 
-        fig_objects = run_code(code_piece, code_path, ns, function_name)
+        fig_objects = run_code(code_piece, code_path, ns, function_name, fig_vars)
 
         figures = []
         for j, fig_obj in enumerate(fig_objects):
@@ -759,6 +768,7 @@ def run(arguments, content, options, state_machine, state, lineno):
             config,
             context_reset=context_opt == "reset",
             close_figs=context_opt == "close-figs",
+            fig_vars=options.get("fig-vars"),
         )
         errors = []
     except PlotError as err:
