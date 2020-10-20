@@ -105,6 +105,7 @@ The plot directive has the following configuration options:
         it will default to a string containing::
 
             import plotly
+            import plotly.express as px
 
     plotly_basedir
         Base directory, to which ``plot::`` file names are relative
@@ -502,7 +503,7 @@ def run_code(code, code_path, ns=None, function_name=None, fig_vars=None):
         if not ns:
             if setup.config.plotly_pre_code is None:
                 exec(
-                    "import plotly\n",
+                    "import plotly\nimport plotly.express as px",
                     ns,
                 )
             else:
