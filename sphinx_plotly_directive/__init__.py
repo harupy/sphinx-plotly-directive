@@ -104,7 +104,10 @@ The plot directive has the following configuration options:
         Code that should be executed before each plot. If not specified or None
         it will default to a string containing::
 
+            import numpy as np
             import plotly
+            import plotly.graph_objects as go
+            import plotly.express as px
 
     plotly_basedir
         Base directory, to which ``plot::`` file names are relative
@@ -502,7 +505,14 @@ def run_code(code, code_path, ns=None, function_name=None, fig_vars=None):
         if not ns:
             if setup.config.plotly_pre_code is None:
                 exec(
-                    "import plotly\n",
+                    "\n".join(
+                        [
+                            "import numpy as np",
+                            "import plotly",
+                            "import plotly.graph_objects as go",
+                            "import plotly.express as px",
+                        ]
+                    ),
                     ns,
                 )
             else:
