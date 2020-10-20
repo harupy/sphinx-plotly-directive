@@ -806,9 +806,8 @@ def run(arguments, content, options, state_machine, state, lineno):
             src_link = None
 
         if config.plotly_include_directive_source:
-            directive_source = create_code_block(
-                create_directive_block("plotly", arguments, options_copy, content), "text"
-            )
+            directive_source = create_directive_block("plotly", arguments, options_copy, content)
+            directive_source = create_code_block(directive_source, "text")
         else:
             directive_source = ""
 
