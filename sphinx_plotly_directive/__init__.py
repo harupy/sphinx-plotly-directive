@@ -85,6 +85,14 @@ The ``plotly`` directive supports the following options:
         figure. This overwrites the caption given in the content, when the plot
         is generated from a file.
 
+    iframe-width
+        The width of the iframe in which a plotly figure is rendered. The default can be changed
+        using the `plotly_iframe_width` variable in :file:`conf.py`.
+
+    iframe-height
+        The height of the iframe in which a plotly figure is rendered. The default can be changed
+        using the `plotly_iframe_height` variable in :file:`conf.py`.
+
 Additionally, this directive supports all of the options of the `image`
 directive, except for *target* (since plot will add its own target).  These
 include *alt*, *height*, *width*, *scale*, *align* and *class*.
@@ -136,10 +144,10 @@ The plot directive has the following configuration options:
         helper modules for all code are located.
 
     plotly_iframe_width
-        The width of the iframe that stores a plotly figure. Defaults to "100%".
+        The width of the iframe in which a plotly figure is rendered. The default is "100%".
 
     plotly_iframe_height
-        The width of the iframe that stores a plotly figure. Defaults to "500px".
+        The height of the iframe in which a plotly figure is rendered. The default is "500px".
 
     plotly_template
         Provide a customized template for preparing restructured text.
