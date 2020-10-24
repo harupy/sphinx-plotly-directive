@@ -41,6 +41,12 @@ See [documentation](https://sphinx-plotly-directive.readthedocs.io/en/latest/ind
 
 ## Development
 
+### Install dependencies
+
+```
+pip install -e ".[dev]"
+```
+
 ### Format code
 
 ```
