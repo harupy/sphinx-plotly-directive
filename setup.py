@@ -30,14 +30,16 @@ def get_readme():
 
 
 def get_install_requires():
-    return ["plotly"]
+
+    return [
+        "plotly",
+        "pandas",  # required for plotly express
+    ]
 
 
 def get_extras_require():
     return {
         "dev": [
-            # required by plotly express
-            "pandas",
             # code formatting
             "flake8",
             "isort",
