@@ -35,7 +35,7 @@ The last line of a code block must end with an expression that evaluates to a pl
 
 #### Output:
 
-<img src="https://user-images.githubusercontent.com/17039389/96469067-c3275b80-1267-11eb-89b5-4370e945ac2c.png" width="80%" />
+<img src="https://user-images.githubusercontent.com/17039389/97077273-4278ae80-161d-11eb-89d7-9963776b7ed3.gif" width="80%" />
 
 See [documentation](https://sphinx-plotly-directive.readthedocs.io/en/latest/index.html) for details.
 
