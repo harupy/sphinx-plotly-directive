@@ -72,3 +72,25 @@ By default, the following code will be executed before running each code block. 
    title = "plotly version: {}".format(plotly.__version__)
    fig1 = go.Figure(go.Scatter(x=x, y=y), layout=dict(title=title))
    fig2 = px.scatter(x=x, y=y, title=title)
+
+
+Specify figure size
+~~~~~~~~~~~~~~~~~~~
+
+.. plotly::
+   :iframe-width: 500px
+   :iframe-height: 300px
+
+   import plotly.express as px
+
+   px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
+
+
+You can set the default ``iframe-width`` and ``iframe-height`` by specifying ``plotly_iframe_width`` (default: ``"100%"``) and ``plotly_iframe_height`` (default: ``"500px"``) in ``conf.py``.
+
+.. code-block:: python
+
+   # conf.py
+
+   plotly_iframe_width = "500px"
+   plotly_iframe_height = "300px"

@@ -256,6 +256,8 @@ class PlotlyDirective(Directive):
         "encoding": directives.encoding,
         "caption": directives.unchanged,
         "fig-vars": _option_fig_vars,
+        "iframe-width": directives.unchanged,
+        "iframe-height": directives.unchanged,
     }
 
     def run(self):
@@ -680,6 +682,8 @@ def run(arguments, content, options, state_machine, state, lineno):
     options_copy = copy.deepcopy(options)
 
     options.setdefault("include-source", config.plotly_include_source)
+    options.setdefault("iframe-width", config.plotly_iframe_width)
+    options.setdefault("iframe-height", config.plotly_iframe_height)
     keep_context = "context" in options
     context_opt = None if not keep_context else options["context"]
 
@@ -853,8 +857,8 @@ def run(arguments, content, options, state_machine, state, lineno):
             multi_figure=len(figures) > 1,
             options=opts,
             figures=figures,
-            iframe_width=config.plotly_iframe_width,
-            iframe_height=config.plotly_iframe_height,
+            iframe_width=options["iframe-width"],
+            iframe_height=options["iframe-height"],
             source_code=source_code,
             html_show_formats=config.plotly_html_show_formats and len(figures),
             caption=caption,
