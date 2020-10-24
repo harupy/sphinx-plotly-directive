@@ -16,7 +16,7 @@ pip install sphinx-plotly-directive
 pip install git+https://github.com/harupy/sphinx-plotly-directive.git
 ```
 
-## How to use
+## Usage
 
 #### Source:
 
