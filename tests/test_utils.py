@@ -21,11 +21,11 @@ def test_assign_last_line_into_variable():
     code = """
 a = 1
 a
-""".strip()
+"""
     expected = """
 a = 1
 b = a
-""".strip()
+"""
 
     assert assign_last_line_into_variable(code, "b") == expected
 
