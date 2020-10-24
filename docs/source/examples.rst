@@ -54,7 +54,7 @@ Using pre-imported modules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 By default, the following code will be executed before running each code block. This allows to use
-``np``, ``plotly``, ``go``, and `px` without importing them.
+``np``, ``plotly``, ``go``, and ``px`` without importing them.
 
 .. code-block:: python
 
