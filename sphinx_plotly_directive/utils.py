@@ -13,9 +13,12 @@ def save_plotly_figure(fig, path):
 
 
 def assign_last_line_into_variable(code, variable_name):
-    *rest, last = code.strip().split("\n")
-    last = "{} = ".format(variable_name) + last
-    return "\n".join([*rest, last])
+    lines = code.split("\n")
+    for idx in range(len(lines) - 1, -1, -1):
+        if lines[idx].strip() != "":
+            lines[idx] = "{} = ".format(variable_name) + lines[idx]
+            break
+    return "\n".join(lines)
 
 
 def create_directive_block(name, arguments, options, content):
