@@ -4,6 +4,8 @@ fig-vars
 Single
 ~~~~~~
 
+With `fig-vars` option, you can render a plotly figure assigned in a variable.
+
 .. plotly::
    :fig-vars: fig1
 
@@ -14,6 +16,8 @@ Single
 
 Multiple
 ~~~~~~~~
+
+You can specify multiple variables.
 
 .. plotly::
    :fig-vars: fig1, fig2
