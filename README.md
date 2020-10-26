@@ -8,7 +8,7 @@
 
 A directive for including a Plotly figure in a Sphinx document.
 
-_**Based on [matplotlib's plot directive](https://matplotlib.org/3.1.1/devel/plot_directive.html).**_
+_**This package is based on [matplotlib's plot directive](https://matplotlib.org/3.1.1/devel/plot_directive.html).**_
 
 ## Install
 
