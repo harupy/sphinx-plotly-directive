@@ -31,8 +31,6 @@ pip install git+https://github.com/harupy/sphinx-plotly-directive.git
    px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
 ```
 
-The last line of a code block must end with an expression that evaluates to a plotly figure.
-
 #### Output:
 
 <img src="https://user-images.githubusercontent.com/17039389/97077273-4278ae80-161d-11eb-89d7-9963776b7ed3.gif" width="80%" />
