@@ -535,7 +535,6 @@ def run_code(code, code_path, ns=None, function_name=None, fig_vars=None):
         variable_name = "fig"
 
         if ends_with_show(code):
-            print(strip_last_line(code))
             exec(strip_last_line(code), ns)
             figs = [ns[fig_var] for fig_var in fig_vars] if fig_vars else [ns[variable_name]]
         elif function_name is not None:
