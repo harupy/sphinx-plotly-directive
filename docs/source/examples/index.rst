@@ -13,3 +13,4 @@ Examples
    fig-vars
    precode
    iframe-size
+   show

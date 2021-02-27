@@ -1,3 +1,4 @@
+import re
 import textwrap
 
 import plotly
@@ -132,3 +133,60 @@ def create_code_block(code, language=None):
             "",
         ]
     )
+
+
+def strip_last_line(code):
+    r"""
+    Strips the last line of the give code block
+
+    Parameters
+    ----------
+    code : str
+        Code to strip
+
+    Returns
+    -------
+    str:
+        Stripped code
+
+    Examples
+    --------
+    >>> strip_last_line("a")
+    ''
+    >>> strip_last_line("a\nb")
+    'a'
+    >>> strip_last_line("a\nb\nc")
+    'a\nb'
+    """
+    return "\n".join(code.strip().split("\n")[:-1])
+
+
+def ends_with_show(code):
+    r"""
+    Returns True if the last line of the given code block ends with `show()`
+
+    Parameters
+    ----------
+    code : str
+        Code that may contain a line that looks like `fig.show()`
+
+    Returns
+    -------
+    str:
+        Variable name of the object that calls `show()`
+
+    Examples
+    --------
+    >>> ends_with_show("fig.show()")  # simple
+    True
+    >>> ends_with_show("fig.show(1, a=2)")  # show with arguments
+    True
+    >>> ends_with_show("fig = dummy\nfig.show()\n")  # multiline
+    True
+    >>> ends_with_show("foo")  # doesn't contains `show`
+    False
+    """
+    # TODO: Use a more strict regular expression
+    pattern = r"^(.+)\.show\(.*\)$"
+    match = re.search(pattern, code.strip().split("\n")[-1], flags=re.DOTALL)
+    return bool(match)

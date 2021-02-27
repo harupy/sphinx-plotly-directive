@@ -172,7 +172,9 @@ from sphinx_plotly_directive.utils import (
     assign_last_line_into_variable,
     create_code_block,
     create_directive_block,
+    ends_with_show,
     save_plotly_figure,
+    strip_last_line,
 )
 
 
@@ -532,7 +534,11 @@ def run_code(code, code_path, ns=None, function_name=None, fig_vars=None):
 
         variable_name = "fig"
 
-        if function_name is not None:
+        if ends_with_show(code):
+            print(strip_last_line(code))
+            exec(strip_last_line(code), ns)
+            figs = [ns[fig_var] for fig_var in fig_vars] if fig_vars else [ns[variable_name]]
+        elif function_name is not None:
             exec(code, ns)
             exec(assign_last_line_into_variable(function_name + "()", variable_name), ns)
             figs = [ns[variable_name]]
