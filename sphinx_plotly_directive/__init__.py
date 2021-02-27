@@ -172,8 +172,8 @@ from sphinx_plotly_directive.utils import (
     assign_last_line_into_variable,
     create_code_block,
     create_directive_block,
-    save_plotly_figure,
     ends_with_show,
+    save_plotly_figure,
     strip_last_line,
 )
 
