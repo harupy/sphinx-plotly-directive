@@ -1,12 +1,15 @@
 import os
 
 import plotly.express as px
+import pytest
 
 from sphinx_plotly_directive.utils import (
     assign_last_line_into_variable,
     create_code_block,
     create_directive_block,
     save_plotly_figure,
+    ends_with_show,
+    strip_last_line,
 )
 
 
@@ -63,3 +66,28 @@ print(1)
 """.lstrip()
 
     assert create_code_block(code, "python") == expected
+
+
+@pytest.mark.parametrize(
+    "code, expected_result",
+    [
+        ("a", ""),
+        ("a\nb", "a"),
+        ("a\nb\nc", "a\nb"),
+    ],
+)
+def test_strip_last_line(code, expected_result):
+    assert strip_last_line(code) == expected_result
+
+
+@pytest.mark.parametrize(
+    "code, expected_result",
+    [
+        ("fig.show()", True),  # simple
+        ("fig.show(1, a=2)", True),  # contains arguments
+        ("fig = dummy\nfig.show()\n", True),  # multiline
+        ("fig", False),  # no show
+    ],
+)
+def test_ends_with_show(code, expected_result):
+    assert ends_with_show(code) == expected_result
