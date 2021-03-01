@@ -13,7 +13,7 @@ from sphinx_plotly_directive.utils import (
 )
 
 
-def tset_save_plotly_figure(tmpdir):
+def test_save_plotly_figure(tmpdir):
     fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
     out_path = os.path.join(tmpdir.strpath, "fig.html")
     save_plotly_figure(fig, out_path)
