@@ -30,9 +30,14 @@ def save_plotly_figure(fig, path):
     >>> path = tempfile.NamedTemporaryFile(suffix=".html").name
     >>> save_plotly_figure(fig, path)
     """
-    fig_html = plotly.offline.plot(fig, output_type="div", include_plotlyjs="cdn", auto_open=False)
-    with open(path, "w") as f:
-        f.write(fig_html)
+    ext = path.split(".")[-1]
+    if ext in ["htm", "html"]:
+        fig_html = plotly.offline.plot(fig, output_type="div",
+            include_plotlyjs="cdn", auto_open=False)
+        with open(path, "w") as f:
+            f.write(fig_html)
+    else:
+        fig.write_image(path)
 
 
 def assign_last_line_into_variable(code, variable_name):

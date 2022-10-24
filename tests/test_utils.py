@@ -19,6 +19,14 @@ def tset_save_plotly_figure(tmpdir):
     save_plotly_figure(fig, out_path)
     assert os.path.exists(out_path)
 
+    out_path = os.path.join(tmpdir.strpath, "fig.png")
+    save_plotly_figure(fig, out_path)
+    assert os.path.exists(out_path)
+
+    out_path = os.path.join(tmpdir.strpath, "fig.pdf")
+    save_plotly_figure(fig, out_path)
+    assert os.path.exists(out_path)
+
 
 def test_assign_last_line_into_variable():
     code = """
