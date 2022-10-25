@@ -151,6 +151,12 @@ The plot directive has the following configuration options:
 
     plotly_template
         Provide a customized template for preparing restructured text.
+
+    plotly_intercept_code
+        A function accepting one argument (the current code block being
+        processed), returning a modified code. This can be used to extract the
+        figure object from custom data classes in order for them to be
+        intercepted and rendered by this extension.
 """
 
 import copy
@@ -300,6 +306,7 @@ def setup(app):
     app.add_config_value("plotly_iframe_width", "100%", True)
     app.add_config_value("plotly_iframe_height", "500px", True)
     app.add_config_value("plotly_template", None, True)
+    app.add_config_value("plotly_intercept_code", None, True)
 
     app.add_config_value("plotly_include_directive_source", None, False)
 
@@ -533,6 +540,13 @@ def run_code(code, code_path, ns=None, function_name=None, fig_vars=None):
             ns["__name__"] = "__main__"
 
         variable_name = "fig"
+        intercept_code = setup.config.plotly_intercept_code
+        if intercept_code is None:
+            intercept_code = lambda x: x
+        elif not callable(intercept_code):
+            raise TypeError("`plotly_intercept_code` must be a function "
+                "accepting one argument (the current code block being "
+                "processed), returning a modified code.")
 
         if ends_with_show(code):
             exec(strip_last_line(code), ns)
@@ -545,7 +559,8 @@ def run_code(code, code_path, ns=None, function_name=None, fig_vars=None):
             exec(code, ns)
             figs = [ns[fig_var] for fig_var in fig_vars]
         else:
-            exec(assign_last_line_into_variable(code, variable_name), ns)
+            exec(assign_last_line_into_variable(
+                intercept_code(code), variable_name), ns)
             figs = [ns[variable_name]]
 
     except (Exception, SystemExit) as err:
